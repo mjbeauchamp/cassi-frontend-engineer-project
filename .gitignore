@@ -23,3 +23,14 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
 BUILD_CONTEXT.md
+
+
+
+# WebStorm
+.idea
+
+# VS Code
+.vscode
+
+# Cursor
+.cursor
