@@ -1,0 +1,153 @@
+{
+	"service_requests": [
+		{
+			"id": "sr-001",
+			"property": { "id": "p-10", "address": "142 Oak Lane, Unit 3B" },
+			"title": "Leaking kitchen faucet",
+			"description": "Tenant reports a steady drip from the kitchen faucet. Has been ongoing for ~2 days.",
+			"status": "open",
+			"priority": "medium",
+			"submitted_at": "2025-01-14T09:23:00Z",
+			"updated_at": "2025-01-14T09:23:00Z",
+			"assignee": null,
+			"notes": []
+		},
+		{
+			"id": "sr-002",
+			"property": { "id": "p-10", "address": "142 Oak Lane, Unit 3B" },
+			"title": "Broken bedroom window latch",
+			"description": "Window in the master bedroom won't latch shut. Security concern.",
+			"status": "in_progress",
+			"priority": "high",
+			"submitted_at": "2025-01-12T15:45:00Z",
+			"updated_at": "2025-01-13T08:00:00Z",
+			"assignee": { "id": "t-4", "name": "Marcus Rivera" },
+			"notes": [
+				{
+					"author": "Marcus Rivera",
+					"text": "Ordered replacement latch, arriving Thursday.",
+					"created_at": "2025-01-13T08:00:00Z"
+				}
+			]
+		},
+		{
+			"id": "sr-003",
+			"property": { "id": "p-22", "address": "8801 Greystone Dr" },
+			"title": "HVAC not cooling",
+			"description": "AC unit is running but blowing warm air. Thermostat set to 72\u00b0F, reading 81\u00b0F.",
+			"status": "open",
+			"priority": "urgent",
+			"submitted_at": "2025-01-15T11:02:00Z",
+			"updated_at": "2025-01-15T11:02:00Z",
+			"assignee": null,
+			"notes": []
+		},
+		{
+			"id": "sr-004",
+			"property": { "id": "p-07", "address": "330 Birchwood Ave, Apt 1" },
+			"title": "Garage door opener malfunction",
+			"description": "Remote and wall button both unresponsive. Tenant manually lifting door.",
+			"status": "resolved",
+			"priority": "medium",
+			"submitted_at": "2025-01-08T14:30:00Z",
+			"updated_at": "2025-01-11T16:45:00Z",
+			"assignee": { "id": "t-2", "name": "Anya Patel" },
+			"notes": [
+				{
+					"author": "Anya Patel",
+					"text": "Replaced logic board. Tested remote and wall button \u2014 both operational.",
+					"created_at": "2025-01-11T16:45:00Z"
+				}
+			]
+		},
+		{
+			"id": "sr-005",
+			"property": { "id": "p-22", "address": "8801 Greystone Dr" },
+			"title": "Mailbox lock jammed",
+			"description": "Key won't turn in the community mailbox lock. Tenant unable to retrieve mail for 3 days.",
+			"status": "open",
+			"priority": "low",
+			"submitted_at": "2025-01-15T08:17:00Z",
+			"updated_at": "2025-01-15T08:17:00Z",
+			"assignee": null,
+			"notes": []
+		},
+		{
+			"id": "sr-006",
+			"property": { "id": "p-15", "address": "77 Sunset Blvd, Suite 200" },
+			"title": "Water stain on ceiling tile",
+			"description": "Large brown stain appeared on a ceiling tile in the main conference room. Possible roof leak.",
+			"status": "in_progress",
+			"priority": "high",
+			"submitted_at": "2025-01-10T10:00:00Z",
+			"updated_at": "2025-01-14T13:20:00Z",
+			"assignee": { "id": "t-4", "name": "Marcus Rivera" },
+			"notes": [
+				{
+					"author": "Marcus Rivera",
+					"text": "Inspected roof \u2014 found cracked flashing near HVAC unit. Roofer scheduled for Monday.",
+					"created_at": "2025-01-13T09:30:00Z"
+				},
+				{
+					"author": "Marcus Rivera",
+					"text": "Replaced ceiling tile as temporary fix. Bucket placed as precaution.",
+					"created_at": "2025-01-14T13:20:00Z"
+				}
+			]
+		},
+		{
+			"id": "sr-007",
+			"property": { "id": "p-07", "address": "330 Birchwood Ave, Apt 1" },
+			"title": "Smoke detector beeping",
+			"description": "",
+			"status": "open",
+			"priority": "low",
+			"submitted_at": "2025-01-15T19:44:00Z",
+			"updated_at": "2025-01-15T19:44:00Z",
+			"assignee": { "id": "t-2", "name": "" },
+			"notes": []
+		},
+		{
+			"id": "sr-008",
+			"property": { "id": "p-31", "address": "" },
+			"title": "Parking lot pothole",
+			"description": "Large pothole near the entrance of the south parking lot. Multiple tenants have complained.",
+			"status": "open",
+			"priority": "medium",
+			"submitted_at": "2025-01-14T07:55:00Z",
+			"updated_at": "2025-01-14T07:55:00Z",
+			"assignee": null,
+			"notes": []
+		},
+		{
+			"id": "sr-009",
+			"property": { "id": "p-10", "address": "142 Oak Lane, Unit 3B" },
+			"title": "Request to repaint living room",
+			"description": "Tenant requesting repaint due to scuff marks and faded paint. Last painted: unknown.",
+			"status": "open",
+			"priority": "low",
+			"submitted_at": "2025-01-13T12:10:00Z",
+			"updated_at": "2025-01-13T12:10:00Z",
+			"assignee": null,
+			"notes": []
+		},
+		{
+			"id": "sr-010",
+			"property": { "id": "p-15", "address": "77 Sunset Blvd, Suite 200" },
+			"title": "Elevator inspection due",
+			"description": "Annual elevator inspection is overdue. Certificate expired December 2024.",
+			"status": "in_progress",
+			"priority": "urgent",
+			"submitted_at": "2025-01-02T09:00:00Z",
+			"updated_at": "2025-01-10T11:15:00Z",
+			"assignee": { "id": "t-7", "name": "Jordan Kim" },
+			"notes": [
+				{
+					"author": "Jordan Kim",
+					"text": "Contacted elevator maintenance company. Inspector available Jan 20.",
+					"created_at": "2025-01-10T11:15:00Z"
+				}
+			]
+		}
+	]
+}
