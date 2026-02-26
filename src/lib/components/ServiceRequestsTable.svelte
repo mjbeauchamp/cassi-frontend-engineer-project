@@ -56,7 +56,7 @@
                         aria-label="View request: {request.title}"
                     >
                         <td class="px-6 py-4 text-sm whitespace-nowrap text-gray-900">
-                            {request.property.address}
+                            {request.property.address || "No address available"}
                         </td>
                         <td class="px-6 py-4 text-sm font-medium text-gray-900">{request.title}</td>
                         <td class="px-6 py-4 whitespace-nowrap">

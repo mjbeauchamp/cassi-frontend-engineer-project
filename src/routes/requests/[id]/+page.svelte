@@ -40,11 +40,11 @@
 			<a href="/" class="text-sm text-gray-500 hover:text-gray-700">← Back to Service Requests</a>
 		</div>
 
-		<div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+		<div class="rounded-lg border border-gray-200 bg-white px-10 py-6 shadow-sm">
 			<div class="mb-6 flex items-start justify-between">
 				<h1 class="text-3xl font-bold text-gray-900">{request.title}</h1>
 				<span
-					class="inline-flex rounded-full px-4 py-2 text-sm leading-5 font-semibold {getStatusClass(
+					class="inline-flex rounded-full px-5 py-2 text-sm leading-5 font-semibold {getStatusClass(
 						request.status
 					)}"
 				>
@@ -52,10 +52,34 @@
 				</span>
 			</div>
 
-			<dl class="mb-10 grid grid-cols-1 gap-6 text-sm sm:grid-cols-2">
+			<hr class="my-5 border-gray-200" />
+
+			<fieldset class="pt-3 pb-2">
+				<legend class="font-medium text-gray-500 text-lg">Update Status</legend>
+				<div class="flex gap-2">
+					{#each STATUS_OPTIONS as status (status)}
+						<button
+							type="button"
+							aria-pressed={request.status === status}
+							onclick={() => updateStatus(status)}
+							class="cursor-pointer rounded-md px-3 py-1.5 text-sm font-medium transition-colors
+							focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-1
+							{request.status === status
+								? 'bg-gray-900 text-white'
+								: 'bg-gray-100 text-gray-600 hover:bg-gray-200'}"
+						>
+							{getStatusLabel(status)}
+						</button>
+					{/each}
+				</div>
+			</fieldset>
+
+			<hr class="my-5 border-gray-200" />
+
+			<dl class="mb-5 grid grid-cols-1 gap-6 text-sm sm:grid-cols-2">
 				<div>
 					<dt class="font-medium text-gray-500 mb-1">Property</dt>
-					<dd class="text-gray-900">{request.property.address}</dd>
+					<dd class="text-gray-900">{request.property.address || "No address available"}</dd>
 				</div>
 				<div>
 					<dt class="font-medium text-gray-500 mb-1">Priority</dt>
@@ -77,7 +101,11 @@
 				</div>
 				<div>
 					<dt class="font-medium text-gray-500 mb-1">Assignee</dt>
-					<dd class="text-gray-900">{request.assignee?.name ?? 'Unassigned'}</dd>
+					<dd class="text-gray-900">
+						{request.assignee?.name ? request.assignee.name : 
+						request.assignee?.id ? `ID: ${request.assignee?.id}`
+						: 'Unassigned'}
+					</dd>
 				</div>
 			</dl>
 
@@ -85,30 +113,8 @@
 
 			<div class="mb-10">
 				<h2 class="mb-1 font-medium text-gray-500 text-lg mb-2">Description</h2>
-				<p class="text-gray-900">{request.description}</p>
+				<p class="text-gray-900">{request.description || "No request description"}</p>
 			</div>
-
-			<hr class="my-5 border-gray-200" />
-
-			<fieldset class="pt-6">
-				<legend class="mb-1 font-medium text-gray-500 text-lg mb-2">Update Status</legend>
-				<div class="flex gap-2">
-					{#each STATUS_OPTIONS as status (status)}
-						<button
-							type="button"
-							aria-pressed={request.status === status}
-							onclick={() => updateStatus(status)}
-							class="cursor-pointer rounded-md px-3 py-1.5 text-sm font-medium transition-colors
-							focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-1
-							{request.status === status
-								? 'bg-gray-900 text-white'
-								: 'bg-gray-100 text-gray-600 hover:bg-gray-200'}"
-						>
-							{getStatusLabel(status)}
-						</button>
-					{/each}
-				</div>
-			</fieldset>
 
 			{#if request.notes.length > 0}
 				<hr class="my-6 border-gray-200" />
