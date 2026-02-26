@@ -15,6 +15,14 @@
 		return 'bg-gray-100 text-gray-800';
 	}
 
+	function getPriorityClass(priority: string): string {
+		if (priority === 'low') return 'bg-gray-100 text-gray-600';
+		if (priority === 'medium') return 'bg-yellow-100 text-yellow-800';
+		if (priority === 'high') return 'bg-orange-100 text-orange-800';
+		if (priority === 'urgent') return 'bg-red-100 text-red-800';
+		return 'bg-gray-100 text-gray-600';
+	}
+
 	function updateStatus(newStatus: string) {
 		serviceRequests.update((requests) =>
 			requests.map((r) => (r.id === data.id ? { ...r, status: newStatus } : r))
@@ -34,9 +42,9 @@
 
 		<div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
 			<div class="mb-6 flex items-start justify-between">
-				<h1 class="text-2xl font-bold text-gray-900">{request.title}</h1>
+				<h1 class="text-3xl font-bold text-gray-900">{request.title}</h1>
 				<span
-					class="inline-flex rounded-full px-2 text-xs leading-5 font-semibold {getStatusClass(
+					class="inline-flex rounded-full px-4 py-2 text-sm leading-5 font-semibold {getStatusClass(
 						request.status
 					)}"
 				>
@@ -44,41 +52,69 @@
 				</span>
 			</div>
 
-			<div class="mb-6 grid grid-cols-2 gap-6 text-sm">
+			<dl class="mb-10 grid grid-cols-1 gap-6 text-sm sm:grid-cols-2">
 				<div>
-					<p class="font-medium text-gray-500">Property</p>
-					<p class="text-gray-900">{request.property.address}</p>
+					<dt class="font-medium text-gray-500 mb-1">Property</dt>
+					<dd class="text-gray-900">{request.property.address}</dd>
 				</div>
 				<div>
-					<p class="font-medium text-gray-500">Priority</p>
-					<span
-						class="inline-flex rounded-full px-2 text-xs leading-5 font-semibold capitalize"
-					>
-						{request.priority}
-					</span>
+					<dt class="font-medium text-gray-500 mb-1">Priority</dt>
+					<dd>
+						<span
+							class="inline-flex rounded-full px-4 py-1 text-xs leading-5 font-semibold capitalize {getPriorityClass(request.priority)}"
+						>
+							{request.priority}
+						</span>
+					</dd>
 				</div>
 				<div>
-					<p class="font-medium text-gray-500">Submitted</p>
-					<p class="text-gray-900">{formatDate(request.submitted_at)}</p>
+					<dt class="font-medium text-gray-500 mb-1">Submitted</dt>
+					<dd class="text-gray-900">{formatDate(request.submitted_at)}</dd>
 				</div>
 				<div>
-					<p class="font-medium text-gray-500">Last Updated</p>
-					<p class="text-gray-900">{formatDate(request.updated_at)}</p>
+					<dt class="font-medium text-gray-500 mb-1">Last Updated</dt>
+					<dd class="text-gray-900">{formatDate(request.updated_at)}</dd>
 				</div>
 				<div>
-					<p class="font-medium text-gray-500">Assignee</p>
-					<p class="text-gray-900">{request.assignee?.name ?? 'Unassigned'}</p>
+					<dt class="font-medium text-gray-500 mb-1">Assignee</dt>
+					<dd class="text-gray-900">{request.assignee?.name ?? 'Unassigned'}</dd>
 				</div>
-			</div>
+			</dl>
 
-			<div class="mb-6">
-				<p class="mb-1 font-medium text-gray-500">Description</p>
+			<hr class="my-5 border-gray-200" />
+
+			<div class="mb-10">
+				<h2 class="mb-1 font-medium text-gray-500 text-lg mb-2">Description</h2>
 				<p class="text-gray-900">{request.description}</p>
 			</div>
 
+			<hr class="my-5 border-gray-200" />
+
+			<fieldset class="pt-6">
+				<legend class="mb-1 font-medium text-gray-500 text-lg mb-2">Update Status</legend>
+				<div class="flex gap-2">
+					{#each STATUS_OPTIONS as status (status)}
+						<button
+							type="button"
+							aria-pressed={request.status === status}
+							onclick={() => updateStatus(status)}
+							class="cursor-pointer rounded-md px-3 py-1.5 text-sm font-medium transition-colors
+							focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-1
+							{request.status === status
+								? 'bg-gray-900 text-white'
+								: 'bg-gray-100 text-gray-600 hover:bg-gray-200'}"
+						>
+							{getStatusLabel(status)}
+						</button>
+					{/each}
+				</div>
+			</fieldset>
+
 			{#if request.notes.length > 0}
+				<hr class="my-6 border-gray-200" />
+
 				<div class="mb-6">
-					<p class="mb-2 font-medium text-gray-500">Notes</p>
+					<h2 class="mb-1 font-medium text-gray-500 text-lg mb-2">Notes</h2>
 					<ul class="space-y-3">
 						{#each request.notes as note (note.created_at)}
 							<li class="rounded-md bg-gray-50 p-3 text-sm">
@@ -92,26 +128,6 @@
 					</ul>
 				</div>
 			{/if}
-
-			<fieldset class="border-t border-gray-200 pt-6">
-				<legend class="mb-3 text-sm font-medium text-gray-500">Update Status</legend>
-				<div class="flex gap-2">
-					{#each STATUS_OPTIONS as status (status)}
-						<button
-							type="button"
-							aria-pressed={request.status === status}
-							onclick={() => updateStatus(status)}
-							class="rounded-md px-3 py-1.5 text-sm font-medium transition-colors
-							focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-1
-							{request.status === status
-								? 'bg-gray-900 text-white'
-								: 'bg-gray-100 text-gray-600 hover:bg-gray-200'}"
-						>
-							{getStatusLabel(status)}
-						</button>
-					{/each}
-				</div>
-			</fieldset>
 		</div>
 	</div>
 {:else}
