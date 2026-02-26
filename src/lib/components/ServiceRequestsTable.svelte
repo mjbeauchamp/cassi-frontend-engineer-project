@@ -14,71 +14,75 @@
 </script>
 
 <div class="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
-    <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-50">
-            <tr>
-                <th
-                    class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
-                >
-                    Property
-                </th>
-                <th
-                    class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
-                >
-                    Title
-                </th>
-                <th
-                    class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
-                >
-                    Status
-                </th>
-                <th
-                    class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
-                >
-                    Priority
-                </th>
-                <th
-                    class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
-                >
-                    Submitted
-                </th>
-            </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-200 bg-white">
-            {#each filteredRequests as request (request.id)}
-                <tr
-                    class="cursor-pointer hover:bg-gray-50"
-                    tabindex="0"
-                    role="link"
-                    onclick={() => goto(`/requests/${request.id}`)}
-                    onkeydown={(e) => e.key === 'Enter' && goto(`/requests/${request.id}`)}
-                    aria-label="View request: {request.title}"
-                >
-                    <td class="px-6 py-4 text-sm whitespace-nowrap text-gray-900">
-                        {request.property.address}
-                    </td>
-                    <td class="px-6 py-4 text-sm font-medium text-gray-900">{request.title}</td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <span
-                            class="inline-flex rounded-full px-2 text-xs leading-5 font-semibold {getStatusClass(
-                                request.status
-                            )}"
-                        >
-                            {getStatusLabel(request.status)}
-                        </span>
-                    </td>
-                    <td
-                        class="px-6 py-4 text-sm whitespace-nowrap text-gray-500"
-                        style="text-transform: capitalize"
+    {#if filteredRequests.length > 0}
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th
+                        class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
                     >
-                        {request.priority}
-                    </td>
-                    <td class="px-6 py-4 text-sm whitespace-nowrap text-gray-500">
-                        {formatDate(request.submitted_at)}
-                    </td>
+                        Property
+                    </th>
+                    <th
+                        class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
+                    >
+                        Title
+                    </th>
+                    <th
+                        class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
+                    >
+                        Status
+                    </th>
+                    <th
+                        class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
+                    >
+                        Priority
+                    </th>
+                    <th
+                        class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
+                    >
+                        Submitted
+                    </th>
                 </tr>
-            {/each}
-        </tbody>
-    </table>
+            </thead>
+            <tbody class="divide-y divide-gray-200 bg-white">
+                {#each filteredRequests as request (request.id)}
+                    <tr
+                        class="cursor-pointer hover:bg-gray-50"
+                        tabindex="0"
+                        role="link"
+                        onclick={() => goto(`/requests/${request.id}`)}
+                        onkeydown={(e) => e.key === 'Enter' && goto(`/requests/${request.id}`)}
+                        aria-label="View request: {request.title}"
+                    >
+                        <td class="px-6 py-4 text-sm whitespace-nowrap text-gray-900">
+                            {request.property.address}
+                        </td>
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900">{request.title}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span
+                                class="inline-flex rounded-full px-2 text-xs leading-5 font-semibold {getStatusClass(
+                                    request.status
+                                )}"
+                            >
+                                {getStatusLabel(request.status)}
+                            </span>
+                        </td>
+                        <td
+                            class="px-6 py-4 text-sm whitespace-nowrap text-gray-500"
+                            style="text-transform: capitalize"
+                        >
+                            {request.priority}
+                        </td>
+                        <td class="px-6 py-4 text-sm whitespace-nowrap text-gray-500">
+                                {formatDate(request.submitted_at)}
+                            </td>
+                        </tr>
+                    {/each}
+                </tbody>
+            </table>
+    {:else}
+        <p class="w-full text-center my-6">No service requests found.</p>
+    {/if}
 </div>
 <!-- TODO: handle empty states -->
