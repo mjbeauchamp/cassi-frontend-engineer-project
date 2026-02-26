@@ -3,6 +3,17 @@ export interface Property {
 	address: string;
 }
 
+export interface Assignee {
+	id: string;
+	name: string;
+}
+
+export interface Note {
+	author: string;
+	text: string;
+	created_at: string;
+}
+
 export interface ServiceRequest {
 	id: string;
 	property: Property;
@@ -12,8 +23,8 @@ export interface ServiceRequest {
 	priority: string;
 	submitted_at: string;
 	updated_at: string;
-	assignee: any;
-	notes: any[];
+	assignee: Assignee | null;
+	notes: Note[];
 }
 
 export const STATUS_OPTIONS = ['open', 'in_progress', 'resolved'] as const;
