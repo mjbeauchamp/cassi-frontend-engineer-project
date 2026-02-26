@@ -52,6 +52,7 @@
                     role="link"
                     onclick={() => goto(`/requests/${request.id}`)}
                     onkeydown={(e) => e.key === 'Enter' && goto(`/requests/${request.id}`)}
+                    aria-label="View request: {request.title}"
                 >
                     <td class="px-6 py-4 text-sm whitespace-nowrap text-gray-900">
                         {request.property.address}

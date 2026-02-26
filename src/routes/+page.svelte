@@ -20,8 +20,9 @@
 	<div class="mb-6 flex items-center justify-between">
 		<h1 class="text-2xl font-bold text-gray-900">Service Requests</h1>
 		<!-- TODO: add sorting -->
-		<div class="flex gap-2">
+		<div role="group" aria-label="Filter by status" class="flex gap-2">
 			<button
+				aria-pressed={filter === 'all'}
 				class="rounded-md px-3 py-1.5 text-sm font-medium {filter === 'all'
 					? 'bg-gray-900 text-white'
 					: 'bg-gray-100 text-gray-600 hover:bg-gray-200'}"
@@ -30,6 +31,7 @@
 				All
 			</button>
 			<button
+				aria-pressed={filter === 'open'}
 				class="rounded-md px-3 py-1.5 text-sm font-medium {filter === 'open'
 					? 'bg-gray-900 text-white'
 					: 'bg-gray-100 text-gray-600 hover:bg-gray-200'}"
@@ -38,6 +40,7 @@
 				Open
 			</button>
 			<button
+				aria-pressed={filter === 'in_progress'}
 				class="rounded-md px-3 py-1.5 text-sm font-medium {filter === 'in_progress'
 					? 'bg-gray-900 text-white'
 					: 'bg-gray-100 text-gray-600 hover:bg-gray-200'}"
@@ -46,6 +49,7 @@
 				In Progress
 			</button>
 			<button
+				aria-pressed={filter === 'resolved'}
 				class="rounded-md px-3 py-1.5 text-sm font-medium {filter === 'resolved'
 					? 'bg-gray-900 text-white'
 					: 'bg-gray-100 text-gray-600 hover:bg-gray-200'}"

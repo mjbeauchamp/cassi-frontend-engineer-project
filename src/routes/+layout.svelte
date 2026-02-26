@@ -17,5 +17,7 @@
 		</div>
 	</header>
 
-	{@render children()}
+	<main>
+		{@render children()}
+	</main>
 </div>
