@@ -1,19 +1,15 @@
 <script lang="ts">
 	import type { ServiceRequest } from '$lib/types';
 	import { formatDate, getStatusLabel } from '$lib/utils/format';
+	import { goto } from '$app/navigation';
 	import { serviceRequests } from '$lib/stores/requests';
-
-	let { data } = $props();
 
 	let filter = $state('all');
 
-	// Load data into store
-	serviceRequests.set(data.requests);
-
 	let filteredRequests = $derived(
 		filter === 'all'
-			? data.requests
-			: data.requests.filter((r: ServiceRequest) => r.status === filter)
+			? $serviceRequests
+			: $serviceRequests.filter((r: ServiceRequest) => r.status === filter)
 	);
 
 	function getStatusClass(status: string): string {
@@ -100,8 +96,14 @@
 				</tr>
 			</thead>
 			<tbody class="divide-y divide-gray-200 bg-white">
-				{#each filteredRequests as request}
-					<tr class="hover:bg-gray-50">
+				{#each filteredRequests as request (request.id)}
+					<tr
+						class="cursor-pointer hover:bg-gray-50"
+						tabindex="0"
+						role="link"
+						onclick={() => goto(`/requests/${request.id}`)}
+						onkeydown={(e) => e.key === 'Enter' && goto(`/requests/${request.id}`)}
+					>
 						<td class="px-6 py-4 text-sm whitespace-nowrap text-gray-900">
 							{request.property.address}
 						</td>

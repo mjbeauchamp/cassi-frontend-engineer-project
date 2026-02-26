@@ -1,7 +1,10 @@
 <script lang="ts">
 	import './layout.css';
+	import { serviceRequests } from '$lib/stores/requests';
 
-	let { children } = $props();
+	let { data, children } = $props();
+
+	serviceRequests.set(data.requests)
 </script>
 
 <div class="min-h-screen bg-gray-50">
